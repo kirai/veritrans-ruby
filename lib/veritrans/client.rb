@@ -69,6 +69,7 @@ module Veritrans
 
       p query_string
 
+      p 
       conn = Faraday.new(:url => server_host)
       @resp = conn.post do |req|
         req.url(Config::REQUEST_KEY_URL)
@@ -81,7 +82,7 @@ module Veritrans
 
       p @resp.inspect
 
-      @token = parse_body(@resp[:body])
+      @token = @resp #parse_body(@resp[:body])
     end
 
     # :nodoc:
