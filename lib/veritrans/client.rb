@@ -67,6 +67,8 @@ module Veritrans
       uri.query_values = params
       query_string = "#{uri.query}&REPEAT_LINE=#{@commodity.length}&#{commodity.join('&')}"
 
+      p query_string
+
       conn = Faraday.new(:url => server_host)
       @resp = conn.post do |req|
         req.url(Config::REQUEST_KEY_URL)
@@ -76,6 +78,8 @@ module Veritrans
 
       delete_keys
       @resp[:url] = @resp[:url].to_s
+
+      p @resp.inspect
 
       @token = parse_body(@resp[:body])
     end
